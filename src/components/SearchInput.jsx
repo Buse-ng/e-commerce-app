@@ -2,7 +2,7 @@ import React from 'react';
 function SearchInput(){
     return(
         <>
-          <div className="md:w-1/2">  {/* DUZENLE !!! BU YOKTU */}
+          <div className="md:w-1/2 hidden md:flex">
             <form>
               <label
                 htmlFor="default-search"
