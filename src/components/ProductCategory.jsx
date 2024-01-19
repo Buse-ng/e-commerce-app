@@ -11,11 +11,11 @@ const ProductCategory = ({ setFilterCategory }) => {
     const categories= ["All Products", ...new Set(products?.map((item) => (item.category)))];
     
   return (
-    <div className="flex justify-center my-4">
+    <div className="flex flex-wrap justify-center my-8">
     {categories.map((category) => (
       <button
         key={category}
-        className="mx-2 p-2 bg-gray-300 rounded-md"
+        className="mx-2 p-2 md:mx-4 md:p-3 lg:mx-6 lg:p-4 bg-gray-300 rounded-md my-2"
         onClick={() => setFilterCategory(category === "All Products" ? null : category)}
       >
         {firstLetterUpperCase(category)}

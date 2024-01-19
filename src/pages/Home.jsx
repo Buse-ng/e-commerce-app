@@ -1,12 +1,12 @@
 import React from 'react'
-import Slider from '../components/Slider'
 import ProductCards from '../components/ProductCards'
-import ProductCategory from '../components/ProductCategory'
+// import ProductCategory from '../components/ProductCategory'
+import SliderData from '../components/SliderData'
 
 function Home() {
   return (
     <div className='mx-auto bg-purple-100'>
-      <Slider/>
+      <SliderData/>
       <ProductCards/>
     </div>
   )

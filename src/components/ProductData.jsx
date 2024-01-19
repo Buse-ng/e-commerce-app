@@ -15,11 +15,15 @@ const ProductData = ({ product }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 250, height: "100%", margin: "auto" }}>
         <Link to={`/product/${id}`} className="">
           <RemoveRedEye />
         </Link>
-        <CardMedia component="img" height="194" image={image} alt="image" />
+        <CardMedia component="img" height="150" width="100%" image={image} alt="image"  
+        sx={{ objectFit: "contain", 
+        maxWidth: "100%", 
+        }}
+        />
 
         <CardContent>
           <Link to={`/product/${id}`} className="">

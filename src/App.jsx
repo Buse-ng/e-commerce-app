@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Nav/>
         <SiteRoute/>
-        <Footer/>
+        {/* <Footer/> */}
       </Router>
     </>
   )
