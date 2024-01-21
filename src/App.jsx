@@ -1,19 +1,18 @@
-import React from 'react'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import { BrowserRouter as Router} from 'react-router-dom';
-import SiteRoute from './SiteRoute';
+import React from "react";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import SiteRoute from "./SiteRoute";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Nav/>
-        <SiteRoute/>
-        {/* <Footer/> */}
-      </Router>
-    </>
-  )
+    <div className="flex flex-col min-h-screen">
+      <Nav />
+      <div className="flex-grow">
+        <SiteRoute />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
