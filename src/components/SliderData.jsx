@@ -19,7 +19,6 @@ const SliderData = () => {
   };
 
   const sliderSettings = {
-    dots: true,
     autoplay: true,
     speed: 500,
     slidesToShow: 1,
@@ -28,36 +27,27 @@ const SliderData = () => {
   };
 
   return (
-    <div className="bg-purple-200">
+    <div className="bg-[#fff] overflow-hidden">
       <Slider {...sliderSettings}>
         {categories.map((category) => (
-          <div
-            key={category}
-            className="relative w-full"
-          >
+          <div key={category} className="relative w-full">
             {/* Carousel wrapper */}
-            <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-              {/* <img
-                className="h-16 w-16 object-cover"
+            <div className="relative h-56 rounded-lg md:h-96">
+              <img
+                className="md:p-8 flex items-center justify-center object-cover"
                 src={randomImgForSlider(category)}
                 alt="img-slider"
-              /> */}
-              <div className="absolute inset-0 flex items-center justify-center text-white">
+              />
+              <div className="absolute inset-0 hidden md:flex items-center justify-end text-purple-400 font-semibold">
                 <div>
-                  <h2 className="text-4xl font-semibold">{`${
-                    category.split(" ")[0]
-                  } colleciton`}</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  <h2 
+                    className="text-xl md:text-5xl transform -rotate-90 md:rotate-0 tracking-wide text-gray-500 hover:text-gray-800">
+                      {`${category.split(" ")[0]} colleciton`}
+                  </h2>
+                  <p className="py-2 hover:text-purple-500">
+                    Explore the unique and stylish pieces in our {`${category.split(" ")[0]}`} collection.
                   </p>
                 </div>
-                <button className="bg-purple-600 hover:bg-purple-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button">
-                  SHOP NOW
-                </button>
-                {/* <Button variant="contained" color="secondary">
-                  SHOP NOW
-                </Button> */}
               </div>
             </div>
           </div>

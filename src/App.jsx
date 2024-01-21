@@ -5,7 +5,7 @@ import SiteRoute from "./SiteRoute";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="bg-purple-200 flex flex-col min-h-screen">
       <Nav />
       <div className="flex-grow">
         <SiteRoute />

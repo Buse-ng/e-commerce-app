@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className='mx-auto'>
       <SliderData/>
-      <ProductCards className=" " />
+      <ProductCards/>
     </div>
   )
 }
