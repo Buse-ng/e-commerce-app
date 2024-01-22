@@ -11,7 +11,7 @@ const ProductCategory = ({ setFilterCategory }) => {
     const categories= ["All Products", ...new Set(products?.map((item) => (item.category)))];
     
   return (
-    <div className="flex flex-wrap justify-center my-8">
+    <div className="flex flex-wrap justify-center my-16">
     {categories.map((category) => (
       <button
         key={category}
