@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 // import SearchInput from "./SearchInput";
 import { MdFavorite, MdOutlineShoppingBag } from "react-icons/md";
+import { CartContext } from "../context/CartContext";
+import CartBar from "./CartBar";
 
 function Nav() {
+  const {openCartBar, setOpenCartBar}=useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
 
   const menuClicked = () => {
@@ -80,9 +83,11 @@ function Nav() {
               </li>
               <li>
                 <button 
-                  className="block py-2 px-3 md:p-0 text-white text-xl bg-purple-700 rounded md:text-purple-500 md:bg-transparent"
-                  aria-current="shopping cart"
+                  onClick={()=> setOpenCartBar(!openCartBar)}
+                  className="flex relative py-2 px-3 md:p-0 text-white text-xl bg-purple-700 rounded
+                   md:text-purple-500 md:bg-transparent"
                 >
+                  <CartBar/> 
                   <MdOutlineShoppingBag  />
                 </button>
               </li>
