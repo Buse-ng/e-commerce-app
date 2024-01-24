@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
+import logo from "../assets/logo.jpg";
 import { Link } from "react-router-dom";
 // import SearchInput from "./SearchInput";
 import { MdFavorite, MdOutlineShoppingBag } from "react-icons/md";
 import { CartContext } from "../context/CartContext";
 import CartBar from "./CartBar";
+
+
 
 function Nav() {
   const {openCartBar, setOpenCartBar}=useContext(CartContext);
@@ -22,7 +25,7 @@ function Nav() {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="/src/assets/logo.jpg"
+              src={logo}
               className="h-12 rounded-full"
               alt="Logo"
             />

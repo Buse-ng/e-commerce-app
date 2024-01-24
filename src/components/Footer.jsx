@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import logo from "../assets/logo.jpg"
 function Footer() {
   return (
     <>
-      <footer className="mt-24 bg-gray-900 rounded-t-sm shadow">
+      <footer className="mt-24 bg-gray-900 rounded-t-sm shadow overflow-hidden">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-16">
           <div className="sm:flex sm:items-center sm:justify-between flex-nowrap">
             <Link to="/" className="flex items-center mb-4 sm:mb-0 space-x-3">
               <img
-                src="/src/assets/logo.jpg"
+                src={logo}
                 className="h-8 rounded-full"
                 alt="Logo"
               />
