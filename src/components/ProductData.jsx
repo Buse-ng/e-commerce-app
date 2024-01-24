@@ -1,38 +1,43 @@
-import React from "react";
-// import IconButton from "@mui/material/IconButton";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-import { AddShoppingCart } from "@mui/icons-material";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  MdFavorite,
-  MdFavoriteBorder,
-  MdOutlineFavoriteBorder,
-  MdOutlineFavorite,
-  MdOutlineShoppingCart,
-} from "react-icons/md";
+import { MdAddShoppingCart, MdFavorite, MdOutlineShoppingCart } from "react-icons/md";
 
 const ProductData = ({ product }) => {
   const { id, title, image, price, rating } = product;
-// DED0B6
+
+  const [favoriteBtn, setFavoriteBtn] = useState(false);
+
+  const favoriteBtnClicked = () => {
+    setFavoriteBtn(!favoriteBtn);
+    console.log("favoriteBtnClicked");
+  };
+
   return (
     <div className="w-full max-w-md bg-[#F3EEEA] border border-gray-200 rounded-lg shadow h-96 overflow-hidden">
       {/* card img and favorites button */}
       <div className="h-1/2 overflow-hidden">
-        <Link to={`/product/${id}`} className="block relative">
-          <div className="bg-white overflow-hidden">
-            <img
-              src={image}
-              alt={title}
-              className="rounded-t-lg object-contain w-full h-44 hover:h-40"
-            />
-          </div>
+        <div className="block relative">
+          <Link to={`/product/${id}`}>
+            <div className="bg-white overflow-hidden">
+              <img
+                src={image}
+                alt={title}
+                className="rounded-t-lg object-contain w-full h-44 hover:h-40"
+              />
+            </div>
+          </Link>
+          
+          {/* favorites button */}
           <div className="absolute top-2 right-2">
-            <button className="bg-gray-50 text-gray-400 text-xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
+            <button
+              onClick={favoriteBtnClicked}
+              className={`${favoriteBtn ? "text-red-600" : "text-gray-400" } bg-gray-50 text-xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300`}
+            >
               <MdFavorite />
             </button>
           </div>
           {/* -p-8  */}
-        </Link>
+        </div>
       </div>
       {/* card content */}
       <div className="p-4">
@@ -78,7 +83,7 @@ const ProductData = ({ product }) => {
         focus:outline-none focus:ring"
         >
           <button className="bg-transparent text-gray-500 text-xl p-3 ml-4">
-            <MdOutlineShoppingCart />
+            <MdAddShoppingCart />
           </button>
         </div>
       </div>
