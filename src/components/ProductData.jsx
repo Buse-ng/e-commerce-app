@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart, MdFavorite, MdOutlineShoppingCart } from "react-icons/md";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 const ProductData = ({ product }) => {
   const { id, title, image, price, rating } = product;
 
-  const [favoriteBtn, setFavoriteBtn] = useState(false);
+  const { favorites, toggleFavorites } = useContext(FavoritesContext);
+
+  const isFavorite = favorites.includes(id);
 
   const favoriteBtnClicked = () => {
-    setFavoriteBtn(!favoriteBtn);
-    console.log("favoriteBtnClicked");
+    toggleFavorites(id);
+    // console.log("favoriteBtnClicked");
   };
+
 
   return (
     <div className="w-full max-w-md bg-[#F3EEEA] border border-gray-200 rounded-lg shadow h-96 overflow-hidden">
@@ -31,7 +35,7 @@ const ProductData = ({ product }) => {
           <div className="absolute top-2 right-2">
             <button
               onClick={favoriteBtnClicked}
-              className={`${favoriteBtn ? "text-red-600" : "text-gray-400" } bg-gray-50 text-xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300`}
+              className={`${isFavorite ? "text-red-600" : "text-gray-400" } bg-gray-50 text-xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300`}
             >
               <MdFavorite />
             </button>

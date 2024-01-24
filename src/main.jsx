@@ -5,11 +5,14 @@ import "./index.css";
 import "./reset.css";
 import StoreProvider from "./context/StoreContext.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
+import FavoritesProvider from "./context/FavoritesContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
     <StoreProvider>
-      <App />
+      <FavoritesProvider>
+        <App />
+      </FavoritesProvider>
     </StoreProvider>
   </Router>
 );
