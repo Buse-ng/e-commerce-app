@@ -2,9 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart, MdFavorite, MdOutlineShoppingCart } from "react-icons/md";
 import { FavoritesContext } from "../context/FavoritesContext";
+import { CartContext } from "../context/CartContext";
 
 const ProductData = ({ product }) => {
   const { id, title, image, price, rating } = product;
+
+  const {addToCart}=useContext(CartContext);
 
   const { favorites, toggleFavorites } = useContext(FavoritesContext);
 
@@ -83,9 +86,10 @@ const ProductData = ({ product }) => {
         </div>
         {/* add to cart butons */}
         <div
+          onClick={()=>addToCart(product, id)}
           className="border border-gray-800 bg-gray-300 rounded-2xl hover:bg-gray-200 cursor-pointer 
-        focus:outline-none focus:ring"
-        >
+          focus:outline-none focus:ring"
+          >
           <button className="bg-transparent text-gray-500 text-xl p-3 ml-4">
             <MdAddShoppingCart />
           </button>

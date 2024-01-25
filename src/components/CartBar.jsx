@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import CartItem from "./CartItem";
 
 function CartBar() {
-  const { openCartBar, handleCloseCartBar } = useContext(CartContext);
+  const { openCartBar, handleCloseCartBar, cart } = useContext(CartContext);
 
   return (
     <div
@@ -14,6 +15,12 @@ function CartBar() {
         Shopping Cart
       </h2>
       <hr className="border-b-2 border-gray-200" />
+
+      <div className="mt-4">
+        {cart.map((item)=>{
+         return <CartItem item={item} key={item.id} />;
+        })}
+      </div>
     </div>
   );
 }
