@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Favorites from "./pages/Favorites";
+import ProductDetail from "./pages/ProductDetail";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function SiteRoute() {
   return (
@@ -13,6 +15,9 @@ function SiteRoute() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/product/:id" element={<ProductDetail/>}/>
+        
+        <Route path="*" element={<NotFoundPage/>} /> {/* must always be on the last line */} {/* like switch case default */}
       </Routes>
     </>
   );
