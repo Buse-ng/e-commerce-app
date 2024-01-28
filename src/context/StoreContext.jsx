@@ -1,20 +1,19 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import FakeStoreApi from "../axios/FakeStoreApi";
 
 export const StoreContext = createContext();
 
 const StoreProvider = ({ children }) => {
-  const [products, SetProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try{
-
+      try {
         const response = await FakeStoreApi.get("/products");
         const data = response.data;
-        console.log(data);
-        SetProducts(data);
-      }catch(error){
+        setProducts(data);
+      } catch (error) {
         console.error(error);
       }
     };
@@ -22,9 +21,10 @@ const StoreProvider = ({ children }) => {
   }, []);
 
   return (
-    <StoreContext.Provider value={{ products }}>
+    <StoreContext.Provider value={{ products, searchTerm, setSearchTerm }}>
       {children}
     </StoreContext.Provider>
   );
 };
+
 export default StoreProvider;

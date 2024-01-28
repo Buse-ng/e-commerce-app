@@ -1,19 +1,21 @@
 import React, { useContext, useState } from "react";
 import logo from "../assets/logo.jpg";
 import { Link } from "react-router-dom";
-// import SearchInput from "./SearchInput";
+import SearchInput from "./SearchInput";
 import { MdFavorite, MdOutlineShoppingBag } from "react-icons/md";
 import { CartContext } from "../context/CartContext";
 import CartBar from "./CartBar";
-
-
+import { StoreContext } from "../context/StoreContext";
 
 function Nav() {
   const {openCartBar, setOpenCartBar}=useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
-
+  const { searchTerm, setSearchTerm } = useContext(StoreContext);
   const menuClicked = () => {
     setOpenMenu(!openMenu);
+  };
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
   };
 
   return (
@@ -29,7 +31,7 @@ function Nav() {
               className="h-12 rounded-full"
               alt="Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center md:text-2xl font-semibold whitespace-nowrap dark:text-white">
               Lorem<span className="text-purple-500">store</span>
             </span>
           </Link>
@@ -58,7 +60,9 @@ function Nav() {
               />
             </svg>
           </button>
-          {/* <SearchInput/> */}
+          <div className="hidden md:block">
+            <SearchInput searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+          </div>        
 
           <div
             className={`${
@@ -94,33 +98,6 @@ function Nav() {
                   <MdOutlineShoppingBag  />
                 </button>
               </li>
-
-              {/* <li>
-                <button
-                  href="#"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  log out
-                </button>
-              </li> */}
-
-              {/* <li>
-                <Link
-                  to="/LogIn"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                  aria-current="page"
-                >
-                  Log in
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/SignUp"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Sign up
-                </Link>
-              </li> */}
             </ul>
           </div>
         </div>

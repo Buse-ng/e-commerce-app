@@ -3,21 +3,26 @@ import { Link } from "react-router-dom";
 import { MdAddShoppingCart, MdFavorite, MdOutlineShoppingCart } from "react-icons/md";
 import { FavoritesContext } from "../context/FavoritesContext";
 import { CartContext } from "../context/CartContext";
+import { StoreContext } from "../context/StoreContext";
 
 const ProductData = ({ product }) => {
   const { id, title, image, price, rating } = product;
 
   const {addToCart}=useContext(CartContext);
-
+  const { searchTerm } = useContext(StoreContext);
   const { favorites, toggleFavorites } = useContext(FavoritesContext);
 
+  const isSearchedProduct = title.toLowerCase().includes(searchTerm.toLowerCase());
+  
+  if (!isSearchedProduct) {
+    return null;
+  }
   const isFavorite = favorites.includes(id);
 
   const favoriteBtnClicked = () => {
     toggleFavorites(id);
     // console.log("favoriteBtnClicked");
   };
-
 
   return (
     <div className="w-full max-w-md bg-[#F3EEEA] border border-gray-200 rounded-lg shadow h-96 overflow-hidden">
