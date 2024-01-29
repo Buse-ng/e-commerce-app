@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import { FaShoppingBasket } from "react-icons/fa";
 
 const ProductDetail = () => {
   let { id } = useParams();

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { MdAddShoppingCart, MdFavorite, MdOutlineShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart, MdFavorite } from "react-icons/md";
 import { FavoritesContext } from "../context/FavoritesContext";
 import { CartContext } from "../context/CartContext";
 import { StoreContext } from "../context/StoreContext";
@@ -21,7 +21,6 @@ const ProductData = ({ product }) => {
 
   const favoriteBtnClicked = () => {
     toggleFavorites(id);
-    // console.log("favoriteBtnClicked");
   };
 
   return (
@@ -43,12 +42,13 @@ const ProductData = ({ product }) => {
           <div className="absolute top-2 right-2">
             <button
               onClick={favoriteBtnClicked}
-              className={`${isFavorite ? "text-red-600" : "text-gray-400" } bg-gray-50 text-xl p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300`}
+              className={`${isFavorite ? "text-red-600" : "text-gray-400" } 
+            bg-gray-50 text-xl p-2 rounded-full hover:bg-gray-100 
+              focus:outline-none focus:ring focus:border-blue-300`}
             >
               <MdFavorite />
             </button>
           </div>
-          {/* -p-8  */}
         </div>
       </div>
       {/* card content */}
@@ -56,7 +56,7 @@ const ProductData = ({ product }) => {
         {/* title */}
         <div>
           <Link to={`/product/${id}`} className="block">
-            <h5 className="sm:text-md md:text-xl font-semibold tracking-tight text-gray-900 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <h5 className="sm:text-md md:text-xl font-semibold tracking-tight text-gray-900 overflow-ellipsis whitespace-nowrap overflow-hidden">
               {title}
             </h5>
           </Link>
@@ -92,9 +92,9 @@ const ProductData = ({ product }) => {
         {/* add to cart butons */}
         <div
           onClick={()=>addToCart(product, id)}
-          className="border border-gray-800 bg-gray-300 rounded-2xl hover:bg-gray-200 cursor-pointer 
-          focus:outline-none focus:ring"
-          >
+          className="border border-gray-800 bg-gray-300 rounded-2xl hover:bg-gray-200 
+          focus:outline-none focus:ring cursor-pointer"
+        >
           <button className="bg-transparent text-gray-500 text-xl p-3 ml-4">
             <MdAddShoppingCart />
           </button>

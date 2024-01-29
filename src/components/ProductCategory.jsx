@@ -15,9 +15,13 @@ const ProductCategory = ({ setFilterCategory, resetSort }) => {
     {categories.map((category) => (
       <button
         key={category}
-        className="flex items-center justify-center  w-44 mx-2 p-2 md:mx-4 md:p-3 lg:mx-6 lg:p-4 bg-white rounded-lg my-2 font-semibold text-[#AC87C5] hover:text-purple-600 hover:bg-[#E5D4FF] shadow-md shadow-violet-400 transition ease-in duration-150"
         onClick={() => { setFilterCategory(category === "All Products" ? null : category);
         resetSort();}}
+
+        className={`flex items-center justify-center bg-white rounded-lg
+        w-44 mx-2 my-2 p-2 md:mx-4 md:p-3 lg:mx-6 lg:p-4 font-semibold
+        text-[#AC87C5] hover:text-purple-600 hover:bg-[#E5D4FF] 
+        shadow-md shadow-violet-400 transition ease-in duration-150`}
       >
         {firstLetterUpperCase(category)}
       </button>

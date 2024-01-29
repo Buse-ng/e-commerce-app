@@ -1,16 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../assets/logo.jpg";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
-import { MdFavorite, MdOutlineShoppingBag } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 import { CartContext } from "../context/CartContext";
 import CartBar from "./CartBar";
 import { StoreContext } from "../context/StoreContext";
-
+import { FaShoppingBag } from "react-icons/fa";
+ 
 function Nav() {
-  const {openCartBar, setOpenCartBar}=useContext(CartContext);
-  const [openMenu, setOpenMenu] = useState(false);
-  const { searchTerm, setSearchTerm } = useContext(StoreContext);
+  const { 
+    openCartBar, 
+    setOpenCartBar,
+    totalAmount, 
+    setTotalAmount 
+} = useContext(CartContext);
+
+const { searchTerm, setSearchTerm } = useContext(StoreContext);
+
+const [openMenu, setOpenMenu] = useState(false);
+
   const menuClicked = () => {
     setOpenMenu(!openMenu);
   };
@@ -18,19 +27,34 @@ function Nav() {
     setSearchTerm(value);
   };
 
+  const handleShoppingBagClick = () => {
+    setOpenCartBar(!openCartBar);
+  };
+
+  // Close the menu if clicked outside of it while the menu is open
+  useEffect(() => {
+    const closeMenuOnOutsideClick = (e) => {
+      if (openMenu && !e.target.closest(".navbar-container")) {
+        setOpenMenu(false);
+      }
+    };
+    document.addEventListener("click", closeMenuOnOutsideClick);
+    //unmount
+    return () => {
+      document.removeEventListener("click", closeMenuOnOutsideClick);
+    };
+  }, [openMenu]);
+
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900 overflow-hidden">
+      <nav className="navbar-container border-gray-200 dark:bg-gray-900 overflow-hidden">
+        <CartBar />
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img
-              src={logo}
-              className="h-12 rounded-full"
-              alt="Logo"
-            />
+            <img src={logo} className="h-12 rounded-full" alt="Logo" />
             <span className="self-center md:text-2xl font-semibold whitespace-nowrap dark:text-white">
               Lorem<span className="text-purple-500">store</span>
             </span>
@@ -39,7 +63,8 @@ function Nav() {
             onClick={menuClicked}
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg 
+            md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-default"
             aria-expanded="false"
           >
@@ -61,8 +86,11 @@ function Nav() {
             </svg>
           </button>
           <div className="hidden md:block">
-            <SearchInput searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-          </div>        
+            <SearchInput
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+            />
+          </div>
 
           <div
             className={`${
@@ -74,7 +102,8 @@ function Nav() {
               <li>
                 <Link
                   to="/"
-                  className="block py-2 px-3 md:p-0 text-white bg-purple-700 rounded md:text-purple-500 md:bg-transparent"
+                  className="block py-2 px-3 md:p-0 text-white bg-purple-700  
+                  md:bg-transparent md:text-purple-500 rounded"
                   aria-current="home"
                 >
                   Home
@@ -83,20 +112,26 @@ function Nav() {
               <li>
                 <Link
                   to="/favorites"
-                  className="block py-2 px-3 md:p-0 text-white text-xl bg-purple-700 rounded md:text-purple-500 md:bg-transparent"
+                  className="block text-white text-xl bg-purple-700  md:text-purple-500 
+                  py-2 px-3 md:p-0 md:bg-transparent rounded"
                 >
-                  <MdFavorite/>
+                  <MdFavorite />
                 </Link>
               </li>
               <li>
-                <button 
-                  onClick={()=> setOpenCartBar(!openCartBar)}
-                  className="flex relative py-2 px-3 md:p-0 text-white text-xl bg-purple-700 rounded
-                   md:text-purple-500 md:bg-transparent"
+                <div
+                  onClick={handleShoppingBagClick}
+                  className="flex relative py-2 px-3 md:p-0 text-white text-xl bg-purple-700 
+                  md:bg-transparent md:text-purple-500  cursor-pointer rounded"
                 >
-                  <CartBar/> 
-                  <MdOutlineShoppingBag  />
-                </button>
+                  <FaShoppingBag />
+                  <div
+                    className={`absolute -bottom-2 -right-1 flex items-center bg-gray-500 
+                    justify-center text-white text-xs w-4 h-4 rounded-full`}
+                  >
+                    {totalAmount}
+                  </div>
+                </div>
               </li>
             </ul>
           </div>

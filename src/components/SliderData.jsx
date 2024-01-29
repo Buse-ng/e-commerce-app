@@ -1,4 +1,3 @@
-// import Button from "@mui/material/Button";
 import React, { useContext, useState } from "react";
 import { StoreContext } from "../context/StoreContext";
 import "slick-carousel/slick/slick.css";
@@ -41,7 +40,9 @@ const SliderData = () => {
               <div className="absolute inset-0 hidden md:flex items-center justify-end text-purple-400 font-semibold">
                 <div>
                   <h2 
-                    className="text-xl md:text-5xl transform -rotate-90 md:rotate-0 tracking-wide text-gray-500 hover:text-gray-800">
+                    className="text-xl md:text-5xl transform -rotate-90 md:rotate-0 tracking-wide
+                     text-gray-500 hover:text-gray-800"
+                  >
                       {`${category.split(" ")[0]} colleciton`}
                   </h2>
                   <p className="py-2 hover:text-purple-500">

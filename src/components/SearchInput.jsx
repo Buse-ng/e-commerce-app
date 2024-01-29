@@ -8,7 +8,7 @@ function SearchInput() {
 
   useEffect(() => {
     const filteredResults = products.filter(product =>
-      product?.title && product?.title.toLowerCase().includes(searchTerm.toLowerCase())
+      product?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(filteredResults);
   }, [searchTerm, products]);
@@ -25,7 +25,7 @@ function SearchInput() {
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
           >
-            Search
+            Search Products
           </label>
 
           <div className="relative">
@@ -34,14 +34,14 @@ function SearchInput() {
               onChange={handleSearchChange}
               type="search"
               id="default-search"
-              className="block w-full p-3 ps-10 text-sm rounded-2xl text-gray-700 md:text-white 
+              className={`block w-full p-3 ps-10 text-sm rounded-2xl text-gray-700  
               border bg-gray-100 border-gray-50 placeholder-gray-400 
-              md:border-gray-600 md:bg-gray-700"
+            md:text-white md:border-gray-600 md:bg-gray-700`}
               placeholder="Search Products"
               required=""
             />
             <button
-              type="submit"
+              type="button"
               className="absolute end-2.5 bottom-2 text-sm p-2 rounded-xl
               bg-gray-500 hover:bg-gray-600 font-medium text-white"
             >

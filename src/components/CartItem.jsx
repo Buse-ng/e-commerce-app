@@ -1,35 +1,22 @@
-import React, { useEffect, useReducer } from "react";
-import { IoMdAdd, IoMdRemove, IoMdClose } from "react-icons/io";
+import React, { useContext} from "react";
+import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const CartItem = ({ item }) => {
   const { id, title, price, amount, image } = item;
+  const { removeItemFromCart, increaseAmount, decreaseAmount } = useContext(CartContext);
 
-  const amountCounter = (state, action) => {
-    switch (action.type) {
-      case "+":
-        return { amount: state.amount + 1 };
-      case "-":
-        return { amount: state.amount - 1 };
-      case "set_amount":
-        return { amount: action.amount };
-      default:
-        return state;
-    }
-  };
-  const [state, dispatch] = useReducer(amountCounter, { amount });
-
-  
-  useEffect(() => {
-    dispatch({ type: "set_amount", amount });
-  }, [amount]);
-  
   return (
+    // item content
     <div className="text-gray-600 mt-2 text-sm">
       <div className="relative flex">
         {/* remove button */}
-        <button className="absolute top-0 right-0 text-md hover:text-red-500">
+        <button
+          onClick={() => removeItemFromCart(id)}
+          className="absolute top-0 right-0 text-md hover:text-red-500"
+        >
           <FaTrashAlt />
         </button>
 
@@ -40,7 +27,7 @@ const CartItem = ({ item }) => {
               <img
                 src={image}
                 alt={title}
-                className="rounded-t-lg object-contain w-full h-16"
+                className="rounded-t-lg object-contain w-16 h-16"
               />
             </div>
           </Link>
@@ -48,7 +35,6 @@ const CartItem = ({ item }) => {
 
         {/* title, amount, price */}
         <div className="w-full flex flex-col">
-            
           {/* title */}
           <div className="flex justify-between mb-2 mx-4">
             <Link
@@ -59,39 +45,44 @@ const CartItem = ({ item }) => {
             </Link>
           </div>
 
-          {/* amount, price, item total price */}
           <div className="flex flex-row justify-between">
             {/* amount counter */}
-            <div className="mx-4 border-2 border-solid rounded-xl text-lg border-slate-300 flex items-center justify-center">
-              <button onClick={() => dispatch({ type: "-" })} className="hover:text-gray-800">
+            <div 
+              className="mx-4 border-2 border-solid rounded-xl text-lg border-slate-300 
+              flex items-center justify-center"
+            >
+              <button
+                onClick={() => decreaseAmount(id)}
+                className="hover:text-gray-800"
+              >
                 <IoMdRemove />
               </button>
               <input
                 type="text"
-                placeholder={state.amount}
-                className="w-3 text-center text-sm"
+                placeholder={amount}
+                onChange={(e) => handleAmountChange(e)}
+                className="w-5 text-center text-sm"
               />
-              <button onClick={() => dispatch({ type: "+" })} className="hover:text-gray-800">
+              <button
+                onClick={() => increaseAmount(id)}
+                className="hover:text-gray-800"
+              >
                 <IoMdAdd />
               </button>
             </div>
 
             {/* price */}
             <div>
-              <p className="text-gray-500">
-                ${`${price}`}
-                </p>
+              <p className="text-gray-500">${`${price}`}</p>
             </div>
 
             {/* item total price */}
             <div>
-                <p className="text-gray-900">
-                ${`${state.amount * price}`}
-                </p>
+              <p className="text-gray-900">
+                ${`${(amount * price).toFixed(2)}`}
+              </p>
             </div>
-
           </div>
-
         </div>
       </div>
       <hr className="border-b-1 border-gray-200 mt-2" />
