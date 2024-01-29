@@ -24,7 +24,7 @@ const ProductData = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-md bg-[#e7e2e9] border border-gray-200 rounded-lg shadow h-96 overflow-hidden">
+    <div className="w-full max-w-md bg-[#e6e4e7] border border-gray-200 rounded-lg shadow h-96 overflow-hidden">
       {/* card img and favorites button */}
       <div className="h-1/2 overflow-hidden">
         <div className="block relative">
