@@ -13,8 +13,7 @@ function Nav() {
     openCartBar, 
     setOpenCartBar,
     totalAmount, 
-    setTotalAmount 
-} = useContext(CartContext);
+  } = useContext(CartContext);
 
 const { searchTerm, setSearchTerm } = useContext(StoreContext);
 
@@ -47,7 +46,7 @@ const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <>
-      <nav className="navbar-container border-gray-200 dark:bg-gray-900 overflow-hidden">
+      <nav className="navbar-container border-gray-200 bg-gray-900 overflow-hidden">
         <CartBar />
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
